@@ -20,44 +20,41 @@
     <link href="assets/css/colors/color-74c9be.css" rel="stylesheet">    
     <link href="assets/css/animations.css" rel="stylesheet">
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
-    
-    
+
+    <!-- Yandex API for maps -->
+    <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+
     <!-- JavaScripts needed at the beginning
     ================================================== -->
     <script type="text/javascript" src="http://alvarez.is/demo/marco/assets/js/twitterFetcher_v10_min.js"></script>
 
-    <!-- MAP SCRIPT - ALL CONFIGURATION IS PLACED HERE - VIEW OUR DOCUMENTATION FOR FURTHER INFORMATION -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASm3CwaK9qtcZEWYa-iQwHaGi3gcosAJc&sensor=false"></script>
-    <script type="text/javascript">
-        // When the window has finished loading create our google map below
-        google.maps.event.addDomListener(window, 'load', init);
-    
-        function init() {
-            // Basic options for a simple Google Map
-            // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
-            var mapOptions = {
-                // How zoomed in you want the map to start at (always required)
-                zoom: 11,
-                
-                scrollwheel: false,
+      <script type="text/javascript">
+          var map = new ymaps.Map("map", {
+              center: [55.76, 37.64],
+              zoom: 7
+          });
+      </script>
 
-                // The latitude and longitude to center the map (always required)
-                center: new google.maps.LatLng(55.741331,37.627606), // New York
 
-                // How you would like to style the map. 
-                // This is where you would paste any style found on Snazzy Maps.
-                styles: [	{		featureType:'water',		stylers:[{color:'#74c9be'},{visibility:'on'}]	},{		featureType:'landscape',		stylers:[{color:'#f2f2f2'}]	},{		featureType:'road',		stylers:[{saturation:-100},{lightness:45}]	},{		featureType:'road.highway',		stylers:[{visibility:'simplified'}]	},{		featureType:'road.arterial',		elementType:'labels.icon',		stylers:[{visibility:'off'}]	},{		featureType:'administrative',		elementType:'labels.text.fill',		stylers:[{color:'#444444'}]	},{		featureType:'transit',		stylers:[{visibility:'off'}]	},{		featureType:'poi',		stylers:[{visibility:'off'}]	}]
-            };
+      <script type="text/javascript">
+          ymaps.ready(init);
+          var myMap,
+                  myPlacemark;
 
-            // Get the HTML DOM element that will contain your map 
-            // We are using a div with id="map" seen below in the <body>
-            var mapElement = document.getElementById('map');
+          function init(){
+              myMap = new ymaps.Map("map", {
+                  center: [55.76, 37.64],
+                  zoom: 14
+              });
 
-            // Create the Google Map using out element and options defined above
-            var map = new google.maps.Map(mapElement, mapOptions);
-        }
-    </script>
-    
+              myPlacemark = new ymaps.Placemark([55.76, 37.64], {
+                  hintContent: 'Москва!',
+                  balloonContent: 'Столица России'
+              });
+
+              myMap.geoObjects.add(myPlacemark);
+          }
+      </script>
     
     <!-- Main Jquery & Hover Effects. Should load first -->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -598,6 +595,10 @@
 	</div><!-- /container -->
 
 
+
+
+
+
 	<! ========== CONTACT SECTION =============================================================================================== 
 	=============================================================================================================================>    
 
@@ -610,12 +611,10 @@
 	    		</div>
 	    	</div><! --/row -->
 		</div><!-- /container -->
-	<div id="map"></div>	
+    <div id="map" style=""></div>
 	</div><!-- /white -->
 
 
-
-	
 	<! ========== CALL TO ACTION BAR =============================================================================================== 
 	=============================================================================================================================>    
 	<div id="cta-bar">
